@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:p="http://www.springframework.org/schema/p"
+xmlns:c="http://www.springframework.org/schema/c"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+<!-- setter injection -->
+<!-- <bean name="sequenceGenerator" class="com.bridgelabz.spring_ioc.SequenceGenerator">
+	  <property name="prefix"> <value>30</value>   </property>
+	  <property name="suffix"> <value>A</value>    </property>
+	  <property name="initial"><value>100000</value> </property>
+     </bean>
+ =============================or================================= 
+
+<bean name="sequenceGenerator" class="com.bridgelabz.spring_ioc.SequenceGenerator">
+	<property name="prefix" value="30" /> 
+	<property name="suffix" value="A"/>
+	<property name="initial value="10000"/>
+</bean>
+-->
+
+<!-- constructor injection -->
+<!--
+<bean id="sequenceGenerator" class="com.bridgelabz.spring_ioc.SequenceGenerator">
+	<constructor-arg> <value>30</value>	</constructor-arg>
+	<constructor-arg> <value>A</value></constructor-arg>
+	<constructor-arg> <value>10000</value> </constructor-arg>
+</bean>
+
+                                            
+     =============================or=================================== 
+<bean id="sequenceGenerator" class="com.bridgelabz.spring_ioc.SequenceGenerator">
+	<constructor-arg value="30"/>
+	<constructor-arg value="A"/>
+	<constructor-arg value="10000"/>
+	</bean>
+-->
+
+<!-- Spring also has another convenient shortcut to define properties via setter injection 
+<bean name="sequenceGenerator" class="com.bridgelabz.spring_ioc.SequenceGenerator"
+	 p:prefix="30" p:suffix="A" p:initial="100000" />
+-->
+
+<!-- Spring also has another convenient shortcut to define properties via constructor injection 
+<bean name="sequenceGenerator" class="com.bridgelabz.spring_ioc.SequenceGenerator"
+	 c:prefix="30" c:suffix="A" c:initial="100000"  />
+-->
+
+<!-- The cause of this unexpected result is that the first constructor, with prefix and suffix as arguments, has been
+invoked, but not the second. This is because Spring resolves both of your arguments as String type by default and
+considers the first constructor was most suitable, as no type conversion was required. To specify the expected type of
+your arguments, you have to set it in the type attribute in <constructor-arg>.
+
+<bean id="sequenceGenerator"
+class="com.bridgelabz.spring_ioc.SequenceGenerator">
+<constructor-arg value="30" />
+<constructor-arg value="100000" />
+<property name="suffix" value="A" />
+</bean>
+ -->
+
+<!-- type defined in constructor injection
+<bean id="sequenceGenerator"
+class="com.bridgelabz.spring_ioc.SequenceGenerator">
+<constructor-arg type="java.lang.String" value="30" />
+<constructor-arg type="int" value="100000" />
+<property name="suffix" value="A" />
+</bean>  
+
+<bean id="sequenceGenerator"
+class="com.bridgelabz.spring_ioc.SequenceGenerator">
+<constructor-arg type="int" value="100000" />
+<constructor-arg type="java.lang.String" value="A" />
+<property name="prefix" value="30" />
+</bean>
+-->
+
+<!-- approach to avoid ambiguity in constructors is to specify the constructor parameter names with index  
+<bean id="sequenceGenerator"
+class="com.bridgelabz.spring_ioc.SequenceGenerator">
+<constructor-arg type="int" index="0" value="100000" />
+<constructor-arg type="java.lang.String" index="1" value="A" />
+<property name="prefix" value="30" />
+</bean>
+-->
+
+<!-- And yet another approach to avoid ambiguity in constructors is to specify the constructor parameter names with
+the name attribute.
+<bean id="sequenceGenerator"
+class="com.bridgelabz.spring_ioc.SequenceGenerator">
+<constructor-arg name="initial" value="100000" />
+<constructor-arg name="suffix" value="A" />
+<property name="prefix" value="30" />
+</bean>
+-->
+
+<!-- References for setter injection 
+
+<bean id="datePrefixGenerator"
+class="com.bridgelabz.autowire.DatePrefixGenerator">
+<property name="pattern" value="dd/MM/yyyy " />
+</bean>
+
+<bean id="sequenceGenerator"
+class="com.bridgelabz.spring_ioc.SequenceGenerator">
+ <property name="initial" value="100000" />
+ <property name="suffix" value="A" />
+ <property name="prefixGenerator"><ref bean="datePrefixGenerator" /></property>
+</bean>
+
+-->
+
+<!-- References for Constructor injection  
+<bean id="datePrefixGenerator"
+class="com.bridgelabz.autowire.DatePrefixGenerator">
+<property name="pattern" value="dd/MM/yyyy " />
+</bean>
+
+<bean id="sequenceGenerator"
+class="com.bridgelabz.spring_ioc.SequenceGenerator">
+<constructor-arg>
+<ref bean="datePrefixGenerator" />
+</constructor-arg>
+<property name="initial" value="100000" />
+<property name="suffix" value="A" />
+</bean> -->
+
+<!-- Declare Inner or Anonymous POJO References 
+<bean id="sequenceGenerator"
+class="com.bridgelabz.spring_ioc.SequenceGenerator">
+<property name="initial" value="100000" />
+<property name="suffix" value="A" />
+ 
+<property name="prefixGenerator">
+  <bean class="com.bridgelabz.autowire.DatePrefixGenerator">
+   <property name="pattern" value="dd/MM/yyyy " />
+  </bean>
+</property>
+</bean>
+-->
+<!--  An inner bean can also be declared in a constructor argument.
+ 
+<bean id="sequenceGenerator"
+class="com.bridgelabz.spring_ioc.SequenceGenerator">
+<constructor-arg>
+<bean class="com.bridgelabz.autowire.DatePrefixGenerator">
+<property name="pattern" value="dd/MM/yyyy " />
+</bean>
+</constructor-arg>
+<property name="initial" value="100000" />
+<property name="suffix" value="A" />
+</bean>
+-->
+<!-- Auto-Wiring Modes Supported by Spring (no,byName,byType,constructor) -->
+<!-- byName  
+<bean id="sequenceGenerator"
+class="com.bridgelabz.spring_ioc.SequenceGenerator"
+autowire="byName">
+<property name="initial" value="100000" />
+<property name="suffix" value="A" />
+</bean>
+ 
+<bean id="prefixGenerator"
+class="com.bridgelabz.autowire.DatePrefixGenerator">
+<property name="pattern" value="dd/MM/yyyy " />
+</bean>
+-->
+
+<!-- byType 
+<bean id="sequenceGenerator"
+class="com.bridgelabz.spring_ioc.SequenceGenerator"
+autowire="byType">
+<property name="initial" value="100000" />
+<property name="suffix" value="A" />
+</bean>
+ 
+<bean 
+class="com.bridgelabz.autowire.DatePrefixGenerator">
+<property name="pattern" value="dd/MM/yyyy " />
+</bean>
+-->
+
+<!-- consructor  
+<bean id="sequenceGenerator"
+class="com.bridgelabz.spring_ioc.SequenceGenerator"
+autowire="constructor">
+<property name="initial" value="100000" />
+<property name="suffix" value="A" />
+</bean>
+ 
+<bean 
+class="com.bridgelabz.autowire.DatePrefixGenerator">
+<property name="pattern" value="dd/MM/yyyy " />
+</bean>
+
+-->
+
+
+<!-- <import> tag so Spring makes the POJOs from one configuration file available in another -->
+
+<!-- consructor -->
+<import resource="beans3.xml"/> 
+ 
+<bean id="sequenceGenerator"
+class="com.bridgelabz.spring_ioc.SequenceGenerator"
+autowire="constructor">
+<property name="initial" value="100000" />
+<property name="suffix" value="A" />
+</bean>
+ 
+ 
+
+
+</beans>
