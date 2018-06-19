@@ -1,0 +1,170 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="bs/css/bootstrap.min.css">
+   <link href="bs/css/pnc-com.fancyBox.min.css">
+   <script src="bs/js/jquery.min.js"></script>
+   <script src="bs/js/bootstrap.min.js"></script>
+ 
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    .mgn-btn
+    {
+    	margin-top:10px;
+    }
+    .mgn-left2
+    {
+     margin-left:5px;  
+    }
+    .mgn-left3
+    {
+     margin-left:20px;  
+    }
+    
+    /* Add a gray background color and some padding to the footer */
+   
+    
+  .carousel-inner img {
+      width: 100%; /* Set width to 100% */
+      margin: auto;
+      min-height:200px;
+  }
+
+  /* Hide the carousel text when the screen is less than 600 pixels wide */
+  @media (max-width: 340px) {
+    .carousel-caption {
+	  font-size-adjust:inherit;	
+      display: none;
+    }
+  }
+  .mgn-left
+{
+margin-left: 60px;
+}
+  
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+	margin:0 auto;
+}
+
+.card:hover {
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2)
+}
+
+img {
+    border-radius: 5px 5px 0 0;
+}
+
+.container {
+    padding: 2px 16px;
+}
+
+  </style>
+</head>
+<body style=" background-size: cover;">
+<nav class="navbar navbar-inverse navbar-fixed-top" >
+  <div class="container-fluid ">
+    <div class="navbar-header" >
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+      </button>
+      <i class="navbar-brand" style="padding: 0px; " ><img src="image/savboj.png"></img></i>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav " >
+        <li><a href="index.html" >Home</a></li>
+        <li><a href="aboutus.html" >About</a></li>
+        <li class="active" ><a href="contactus.html" >Contact</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right ">
+        <li><a href="homeCust.html"><span class="glyphicon glyphicon-log-in "></span> Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="jumbotron card" style="background-color:#f58025;  padding-top:70px;">
+  <div class="container text-left" style="color:#FFF">
+    <h1>Online & Mobile Banking</h1>
+    <p><font face="Comic Sans MS, cursive" color="#000000">Online Banking provides you with the tools to take control of your money and to simplify how you manage your finances. It's FREE,easy and secure!</font><br>
+    <font face="Lucida Sans Unicode, Lucida Grande, sans-serif"><span style="margin-left: 350px;"> - Bank of JODHANA</span></font></p>
+  </div>
+</div>
+
+
+<div id="myCarousel" class="carousel slide card" data-ride="carousel">
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner " role="listbox">
+      <div class="item active" style="width:100%; height:70%; background-color:#CCC;"> 
+      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14368.724289114702!2d73.2914628!3d25.7975997!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x2beffcb914b6406e!2sJIET!5e0!3m2!1sen!2sin!4v1491280784062" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen></iframe>
+      </div>
+    </div>
+<div class="container well" style="background-color:#ccc; margin:0 auto; padding:0px;">
+  <h1 class="text-center" style="border-bottom:1px dotted #999;"><font face="Comic Sans MS, cursive" size="+3">Contact Us</font>
+ <div class="col-lg-1"></div>
+ <div class="col-lg-10">
+   <div class="container">
+    <div class="col-lg-4"><br>
+		<form action="contactus1.jsp" method="get">
+           <table class="table-condensed mgn-left">
+            <tr>
+             <td><font>First Name</font> </td>
+             <td><input type="text" class="form-control" name="fnam"></td>
+            </tr>       
+            <tr>
+             <td><font>Last Name</font> </td>
+             <td><input type="text" class="form-control" name="lnam"></td>
+            </tr>       
+            <tr>
+             <td><font>Mobile NO</font></td>
+             <td><input type="number" class="form-control" name="mno"></td>
+            </tr>       
+            <tr>
+             <td><font>Email Id</font></td>
+             <td><input type="email" class="form-control" name="mid"></td>
+            </tr>
+            <tr>
+             <td><font>Subject</font></td>
+             <td><input type="text" class="form-control" name="sub"></td>
+            </tr>       
+            <tr>      
+              <td><font>Message</font></td>
+              <td><textarea name="msg" rows="3"  class="form-control"></textarea></td>
+            </tr>       
+          </table>
+          
+          <button class="btn btn-primary center-block mgn-btn">Submit</button>
+          </form>
+    </div>
+    <div class="col-lg-2"></div>
+    <div class="col-lg-6"><br>
+        <h2 class="text-left text-primary"><font face="Time new Roman">Our Address</font></h2>
+        <h1 class="text-left text-danger" ><font face="Time new Roman"><i>Bank of JODHANA</i></font></h1>
+        <h4 class="text-left text-success"><font face="Time new Roman"><i class="glyphicon glyphicon-map-marker">A-99 Rameshwar Nagar,<br> 
+        <span class="mgn-left3">Basni 1st Phase,(342005)</span><br>
+        <span class="mgn-left3">Jodhpur, Rajasthan</span></i></font></h4>
+        
+        <h4 class="text-left  text-primary"><i class="glyphicon glyphicon-phone-alt"><span class="mgn-left2">Tel</span><span style="margin-left:16px; ">:</span><span class="mgn-left2">0291-222085</span></i></h4>
+        <h4 class="text-left  text-primary"><i class="glyphicon glyphicon-phone"><span class="mgn-left2">Mob</span><span class="mgn-left2">:</span><span class="mgn-left2">09680701900 <br><span style="margin-left: 73px;">08290771900</span></span></i></h4>
+           
+    </div>
+   </div>
+  </div>
+ <div class="col-lg-1"></div>
+</div>
+<footer class="row text-center" style="background-color: #101010; height: 40px; padding-top: 10px; ">
+  <div class="container-fluid">
+   <font face="Lucida Sans Unicode, Lucida Grande, sans-serif"  color="#fff">Copyright©2017 JIET Students. All Rights Reserved | Designed & Developed by - Baberwal Brothers</font>
+  </div>
+</footer>
+
+</body>
+</html>
+

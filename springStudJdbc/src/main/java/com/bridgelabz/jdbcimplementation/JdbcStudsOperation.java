@@ -1,7 +1,6 @@
 package com.bridgelabz.jdbcimplementation;
 
 
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import com.bridgelabz.dao.JdbcOperations;

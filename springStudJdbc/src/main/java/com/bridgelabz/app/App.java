@@ -1,6 +1,5 @@
 package com.bridgelabz.app;
 
-import java.sql.SQLException;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;

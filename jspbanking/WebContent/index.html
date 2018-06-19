@@ -1,0 +1,247 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="bs/css/bootstrap.min.css">
+   <script src="bs/js/jquery.min.js"></script>
+   <script src="bs/js/bootstrap.min.js"></script>
+ 
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Add a gray background color and some padding to the footer */
+    
+  .carousel-inner img {
+      width: 100%; /* Set width to 100% */
+      margin: auto;
+      min-height:200px;
+  }
+
+  /* Hide the carousel text when the screen is less than 600 pixels wide */
+  @media (max-width: 340px) {
+    .carousel-caption {
+	  font-size-adjust:inherit;	
+      display: none;
+    }
+  }
+  
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+	margin:0 auto;
+}
+
+.card:hover {
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2)
+}
+
+img {
+    border-radius: 5px 5px 0 0;
+}
+
+.container {
+    padding: 2px 16px;
+}
+
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top" >
+  <div class="container-fluid ">
+    <div class="navbar-header" >
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+      </button>
+      <i class="navbar-brand" style="padding: 0px; " ><img src="image/savboj.png"></img></i>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav " >
+        <li class="active" ><a href="index.html" >Home</a></li>
+        <li><a href="aboutus.html" >About</a></li>
+        <li><a href="contactus.html" >Contact</a></li>
+      </ul>       
+      <ul class="nav navbar-nav navbar-right ">
+        <li><a href="homeCust.html" style="color:white"><span class="glyphicon glyphicon-log-in " ></span> Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="jumbotron card" style="background-color:#f58025;  padding-top:70px;">
+  <div class="container text-left" style="color:#FFF">
+    <h1>Online & Mobile Banking</h1>
+    <p><font face="Comic Sans MS, cursive" color="#000000">Online Banking provides you with the tools to take control of your money and to simplify how you manage your finances. It's FREE,easy and secure!</font><br>
+    <font face="Lucida Sans Unicode, Lucida Grande, sans-serif"><span style="margin-left: 350px;"> - Bank of JODHANA</span></font></p>
+  </div>
+</div>
+
+<div id="myCarousel" class="carousel slide card" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner " role="listbox">
+
+      <div class="item active">
+        <img src="image/Rev USA-remittance.jpg"  alt="Image">
+      </div>
+
+      <div class="item">
+        <img src="image/Rev_Deposits_B.jpg"  alt="Image">
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+</div>
+
+
+
+<div class="container">
+ <div class="paragraph-element section">
+  <h3><font color="#f58025">Key Features :-</font><br>
+  </h3>
+ </div><br>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading"><font face="Comic Sans MS, cursive">Mobile Banking</font></div>
+        <div class="panel-body"><img src="image/topictout_mobilebanking.jpg" class="img-rounded card" style="width:100%" alt="Image"></div>
+        <div class="panel-footer text-left text-primary card"><P><font face="Lucida Sans Unicode, Lucida Grande, sans-serif">Manage your money on the go!Check your balance,pay a bill,transfer money and even deposit a check right from your mobile device.</P></div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="panel panel-danger">
+        <div class="panel-heading"><font face="Comic Sans MS, cursive">Alerts</font></div>
+        <div class="panel-body"><img src="image/topictout_alerts.jpg" class="img-rounded card" style="width:100%" alt="Image"></div>
+        <div class="panel-footer text-primary text-left card"><p><font face="Lucida Sans Unicode, Lucida Grande, sans-serif">When you sign up,Alerts will notify you when important events have taken place within your accounts and services via text or email.</font></p></div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="panel panel-success">
+        <div class="panel-heading"><font face="Comic Sans MS, cursive">Online Bill Pay</font></div>
+        <div class="panel-body"><img src="image/topictout_online_billpay.jpg" class="img-rounded card" style="width:100%" alt="Image"></div>
+        <div class="panel-footer text-left text-primary card"><p><font face="Lucida Sans Unicode, Lucida Grande, sans-serif">Make sure your bills are paid on time every time with Online Bill Pay.Manage all your bills in one place,pay your bills in just minutes.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading"><font face="Comic Sans MS, cursive">Online Statements</font></div>
+        <div class="panel-body"><img src="image/topictout_online_estatements.jpg" class="img-rounded card" style="width:100%" alt="Image"></div>
+        <div class="panel-footer text-left text-primary card"><p><font face="Lucida Sans Unicode, Lucida Grande, sans-serif">Save paper with online statements.Enjoy access to statements,checks and deposit images.We organize and store up to 7 years of statements online for you.</font></p></div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="panel panel-danger">
+        <div class="panel-heading"><font face="Comic Sans MS, cursive">Transfer Funds</font></div>
+        <div class="panel-body"><img src="image/topictout_transfers.jpg" class="img-rounded card" style="width:100%" alt="Image"></div>
+        <div class="panel-footer text-left text-primary card"><p><font face="Lucida Sans Unicode, Lucida Grande, sans-serif">Move money between accounts,even send money to friends and family with just their email or mobile phone number.</p></font></div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="panel panel-success">
+        <div class="panel-heading"><font face="Comic Sans MS, cursive">Online Banking</font></div>
+        <div class="panel-body"><img src="image/topictout_online_export.jpg" class="img-rounded card" style="width:100%" alt="Image"></div>
+        <div class="panel-footer text-left text-primary card"><p><font face="Lucida Sans Unicode, Lucida Grande, sans-serif">Export transaction information or download transactions for your select PNC accounts.</p></font></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div><br>
+
+<div class="container">
+ <div class="paragraph-element section">
+  <h3><font color="#f58025">Here are more tools to help you bank how and when you want :-</font><br>
+  </h3>
+ </div><br>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading"><font face="Comic Sans MS, cursive">Mobile Deposit</font></div>
+        <div class="panel-body"><img src="image/topic_tout_mobile_deposit.jpg" class="img-rounded card" style="width:100%" alt="Image"></div>
+        <div class="panel-footer text-left text-primary card"><P><font face="Lucida Sans Unicode, Lucida Grande, sans-serif">Deposit checks on your smartphone.</font></p>
+         <a href="deposit.html" target="_blank"><button class="btn btn-danger btn-block">Watch Video</button></a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="panel panel-danger">
+        <div class="panel-heading"><font face="Comic Sans MS, cursive">DepositEasy</font></div>
+        <div class="panel-body"><img src="image/topic_tout_depositeasy.jpg" class="img-rounded card" style="width:100%" alt="Image"></div>
+        <div class="panel-footer text-primary text-left card"><p><font face="Lucida Sans Unicode, Lucida Grande, sans-serif">To make deposits faster and easier.</font></p>
+         <a href="Easydeposit.html" target="_blank"><button class="btn btn-danger btn-block">Watch Video</button></a>
+         </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="panel panel-success">
+        <div class="panel-heading"><font face="Comic Sans MS, cursive">PopMoney</font></div>
+        <div class="panel-body"><img src="image/topic_tout_popmoney.jpg" class="img-rounded card" style="width:100%" alt="Image"></div>
+        <div class="panel-footer text-left text-primary card"><p><font face="Lucida Sans Unicode, Lucida Grande, sans-serif">A convenient way to send and receive money.</p>
+          <a href="Popmoney.html" target="_blank"><button class="btn btn-danger btn-block">Watch Video</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading"><font face="Comic Sans MS, cursive">Text Banking</font></div>
+        <div class="panel-body"><img src="image/topic_tout_text_banking.jpg" class="img-rounded card" style="width:100%" alt="Image"></div>
+        <div class="panel-footer text-left text-primary card"><p><font face="Lucida Sans Unicode, Lucida Grande, sans-serif">Manage accounts from any cell phone.</font></p>
+         <a href="Textbanking.html" target="_blank"><button class="btn btn-danger btn-block">Watch Video</button></a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="panel panel-danger">
+        <div class="panel-heading"><font face="Comic Sans MS, cursive">PNC Finder</font></div>
+        <div class="panel-body"><img src="image/topic_tout_finder.jpg" class="img-rounded card" style="width:100%" alt="Image"></div>
+        <div class="panel-footer text-left text-primary card"><p><font face="Lucida Sans Unicode, Lucida Grande, sans-serif">Find an ATM or Branch on the go.</p></font>
+        <a href="youtube.html" target="_blank"><button class="btn btn-danger btn-block">Watch Video</button></a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="panel panel-success">
+        <div class="panel-heading"><font face="Comic Sans MS, cursive">Mobile Payments</font></div>
+        <div class="panel-body"><img src="image/tout_merchant_services_clover_go.jpg" class="img-rounded card" style="width:100%" alt="Image"></div>
+        <div class="panel-footer text-left text-primary card"><p><font face="Lucida Sans Unicode, Lucida Grande, sans-serif">Accept payments on your phone or tablet.</p></font>
+         <a href="Payment.html" target="_blank"><button class="btn btn-danger btn-block">Watch Video</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<footer class="row text-center" style="background-color: #101010; height: 40px; padding-top: 10px; ">
+  <div class="container-fluid">
+   <font face="Lucida Sans Unicode, Lucida Grande, sans-serif"  color="#fff">Copyright©2017 JIET Students. All Rights Reserved | Designed & Developed by - Baberwal Brothers</font>
+  </div>
+</footer>
+
+</body>
+</html>
+

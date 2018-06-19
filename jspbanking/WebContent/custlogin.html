@@ -1,0 +1,52 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel=stylesheet href="bs/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bs/css/animate.css">
+    <style>
+	 .mgn-top{margin-top:250px;}
+	</style>
+  </head>
+ <body style="background: url(image/photo_bg.jpg) no-repeat center center fixed;
+ 	          background-size: cover;">
+		
+	<div class="row">
+		<div class="container mgn-top">
+			<div class="col-lg-4"></div>
+			<div class="col-lg-4 animated fadeInUp">
+              <div class="text-center" style="background-color:#665851; margin-top: 0; border-radius:5px 5px 0 0;"><br>
+               <font color="#FFFFFF" size="+2" >LOG IN</font>
+              </div>
+			 	 <div style="background-color:#FFF" class="well">
+			 	 <form action="cust.jsp" method="get" class="role">
+			
+				   <div class="input-group ">
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-user"></i>
+                        </span>
+                        <input type="text" class="form-control" placeholder="Customer ID" name="cid">
+                    </div>
+                    <br/>
+					<div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-lock"></i>
+                        </span>
+                        <input type="password" class="form-control" placeholder="Password" name="pas">
+                    </div>
+                    <span class="pull-right">
+                          <a href="cusForgotPass">Forgot Password ? </a>
+				     </span>
+                    <br>
+					<button type="submit" class="btn btn-primary btn-block">Login</button>
+					</form>
+				<a href="index.html"> <button type="submit" class="btn btn-danger btn-block">Back</button></a>
+				</div>
+			</div>
+			<div class="col-lg-4"></div>
+		</div>
+	</div>
+	</div>
+	<br>
+</body>
+</html>
