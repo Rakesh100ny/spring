@@ -1,0 +1,7 @@
+/home/brideit/workspace/springCRUD_REST/src/main/java/com/bridgelabz/rest/config/MyWebInitializer.java
+/home/brideit/workspace/springCRUD_REST/src/main/java/com/bridgelabz/rest/config/WebMvcConfiguration.java
+/home/brideit/workspace/springCRUD_REST/src/main/java/com/bridgelabz/rest/service/UserServiceImpl.java
+/home/brideit/workspace/springCRUD_REST/src/main/java/com/bridgelabz/rest/service/UserService.java
+/home/brideit/workspace/springCRUD_REST/src/main/java/com/bridgelabz/rest/filter/CORSFilter.java
+/home/brideit/workspace/springCRUD_REST/src/main/java/com/bridgelabz/rest/model/User.java
+/home/brideit/workspace/springCRUD_REST/src/main/java/com/bridgelabz/rest/controller/Controller.java

@@ -1,0 +1,9 @@
+com/bridgelabz/rest/controller/HomeController.class
+com/bridgelabz/rest/dao/BookDaoImp.class
+com/bridgelabz/rest/model/Book.class
+com/bridgelabz/rest/config/RootConfig.class
+com/bridgelabz/rest/dao/BookDao.class
+com/bridgelabz/rest/config/WebConfig.class
+com/bridgelabz/rest/service/BookServiceImp.class
+com/bridgelabz/rest/service/BookService.class
+com/bridgelabz/rest/config/MyWebInitializer.class

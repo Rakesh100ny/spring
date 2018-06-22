@@ -1,0 +1,7 @@
+com/bridgelabz/rest/config/WebMvcConfiguration.class
+com/bridgelabz/rest/model/User.class
+com/bridgelabz/rest/controller/Controller.class
+com/bridgelabz/rest/service/UserServiceImpl.class
+com/bridgelabz/rest/filter/CORSFilter.class
+com/bridgelabz/rest/config/MyWebInitializer.class
+com/bridgelabz/rest/service/UserService.class
