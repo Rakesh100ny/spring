@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.ModelAndViewDefiningException;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.bridgelabz.dao.UserDao;
+import com.bridgelabz.service.UserService;
 
 public class Validation extends HandlerInterceptorAdapter {
 	private static final String EMAIL_REGEX = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
@@ -32,25 +32,39 @@ public class Validation extends HandlerInterceptorAdapter {
 	}
 	
 	@Autowired
-	UserDao userDao;
+	UserService userService;
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 
 		String registerPress = request.getParameter("register");
 		String loginPress = request.getParameter("login");
+		String senMailPress = request.getParameter("sendMail");
 		String fName = request.getParameter("firstName");
 		String lName = request.getParameter("lastName");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
+
 		System.out.println("registerPress : " + registerPress);
 		System.out.println("loginPress    : " + loginPress);
-
+		System.out.println("sendMailPress : " + senMailPress);
+		
 		if (registerPress == null) {
 			registerPress = "xyz";
-		} else if (loginPress == null) {
+		} 
+		
+		if (loginPress == null) {
 			loginPress = "xyz";
 		}
+		
+		if(senMailPress==null)
+		{
+		 senMailPress="xyz";	
+		}
+			
+		System.out.println("registerPress : " + registerPress);
+		System.out.println("loginPress    : " + loginPress);
+		System.out.println("sendMailPress : " + senMailPress);
 
 		if (registerPress.equals("register")) {
 			System.out.println("r1");
@@ -96,7 +110,7 @@ public class Validation extends HandlerInterceptorAdapter {
 					error = "Enter Last Name, Maximum length 10 Character";
 				}
 
-				ok3 = userDao.getUserEmailId(email);
+				ok3 = userService.getUserEmailId(email);
 
 				if (ok3) {
 					error = "User is Already Exist...Please Enter Unique Information";
@@ -135,7 +149,7 @@ public class Validation extends HandlerInterceptorAdapter {
 				throw new ModelAndViewDefiningException(modelAndView);
 			} else {
 				System.out.println("r3");
-				boolean ok = userDao.getUserPassword(password, email);
+				boolean ok = userService.getUserPassword(password, email);
 
 				if (ok) {
 					return true;
@@ -148,6 +162,35 @@ public class Validation extends HandlerInterceptorAdapter {
 
 			}
 
+		}
+		else
+		if(senMailPress.equals("sendMail"))
+		{
+			if (email.equals(""))
+			{
+				System.out.println("r1");
+				ModelAndView modelAndView = new ModelAndView("userForgotPass");
+				modelAndView.addObject("error", "Blank Fields Not Allowed - All Fields Compulsory...!");
+				throw new ModelAndViewDefiningException(modelAndView);
+			}
+			else
+			{
+				System.out.println("r2");
+
+				boolean ok = validateEmail(email);
+
+				System.out.println("ok : " + ok);
+
+	
+				if (ok) {
+					return true;
+				} else {
+
+					ModelAndView modelAndView = new ModelAndView("forgot");
+					modelAndView.addObject("error", "Invalid Email-Id...Please Enter correct Email-Id");
+					throw new ModelAndViewDefiningException(modelAndView);
+				}
+			}
 		}
 
 		return false;

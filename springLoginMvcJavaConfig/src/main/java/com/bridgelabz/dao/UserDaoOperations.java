@@ -16,6 +16,7 @@ public class UserDaoOperations implements UserDao {
 	public UserDaoOperations() {
 	}
 
+	@Override
 	public int getUserId() {
 	 String sql="select max(id) as userId from register";
 	 int userId=jdbcTemplate.queryForInt(sql);
@@ -28,6 +29,7 @@ public class UserDaoOperations implements UserDao {
 	 return userId;
 	}
 
+	@Override
 	public boolean insert(User user)
 	{
 		System.out.println("userId Dao : "+user.getId());
@@ -41,6 +43,7 @@ public class UserDaoOperations implements UserDao {
 		
 	}
 
+	@Override
 	public boolean getUserEmailId(String email) {
 		
 		String sql="SELECT COUNT(*) FROM register WHERE email=?";
@@ -58,7 +61,7 @@ public class UserDaoOperations implements UserDao {
 			 }
 	}
 
-	
+	@Override
 	public boolean getUserPassword(String password, String email) {
 		String sql="select password from register where email=?";
 		String result=jdbcTemplate.queryForObject(sql, new Object[] {email}, String.class);
@@ -74,6 +77,7 @@ public class UserDaoOperations implements UserDao {
 		 }
 	}
 
+	@Override
 	public User getUserDetails(String email) {
 		String sql="select * from register where email=?";
 		User user=(User) jdbcTemplate.queryForObject(sql, new Object[] {email},new UserRowMapper());

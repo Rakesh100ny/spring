@@ -39,11 +39,15 @@
 	         <td><input type="password" class="form-control" name="password"  id="pass"></td>
 	        </tr>
 	        </table>
-	        
+				     
        	       <button class="btn btn-block btn-primary" name="login" value="login">Login</button>
        
 	        </form>
 	        
+	         <a href="forgot">
+	          <button class="btn btn-block btn-danger">Forgot Password ?</button> 
+	         </a>
+			
 	      </div>
 	      <div class="col-lg-3"> </div>
 	      </div>

@@ -20,7 +20,7 @@ public class App {
 		char input = ' ';
 		do {
 
-			System.out.print("\n\t\t\t\t\t Employee Management System");
+			System.out.print("\n\t\t\t\t\t Student Management System");
 			System.out.print("\n\t\t\t\t\t----------------------------");
 			System.out.print("\n\t\t\t\t\t Insert  Student : Enter 1");
 			System.out.print("\n\t\t\t\t\t Update  Student : Enter 2");

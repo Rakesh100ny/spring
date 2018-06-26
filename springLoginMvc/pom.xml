@@ -15,30 +15,30 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	<dependencies>
-	<!--spring -web  -->
-	<!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
-<dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-web</artifactId>
-    <version>5.0.6.RELEASE</version>
-</dependency>
-	
-	<!-- spring -bean -->
-	<!-- https://mvnrepository.com/artifact/org.springframework/spring-beans -->
-<dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-beans</artifactId>
-    <version>5.0.6.RELEASE</version>
-</dependency>
-	
-	 <!-- spring-core -->
-	 <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
-<dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-core</artifactId>
-    <version>5.0.6.RELEASE</version>
-</dependency>
-	 
+		<!--spring -web -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>5.0.6.RELEASE</version>
+		</dependency>
+
+		<!-- spring -bean -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-beans -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>5.0.6.RELEASE</version>
+		</dependency>
+
+		<!-- spring-core -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>5.0.6.RELEASE</version>
+		</dependency>
+
 		<!-- mysql -connector -->
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
@@ -73,6 +73,17 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+
+		<!--Mail API -->
+
+		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4</version>
+		</dependency>
+
+
 
 		<!-- AspectJ -->
 		<dependency>

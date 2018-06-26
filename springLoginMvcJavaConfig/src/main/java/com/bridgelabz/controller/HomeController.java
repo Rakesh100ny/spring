@@ -1,6 +1,8 @@
 package com.bridgelabz.controller;
 
- import javax.servlet.http.HttpServletRequest;
+ import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -11,8 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.bridgelabz.dao.UserDao;
 import com.bridgelabz.model.User;
+import com.bridgelabz.service.UserService;
+import com.bridgelabz.utility.EmailUtility;
 
 /**
  * Handles requests for the application home page.
@@ -21,7 +24,7 @@ import com.bridgelabz.model.User;
 public class HomeController {
 
 	 @Autowired
-	 UserDao userDao;
+	 UserService userService;
 
 	
 	
@@ -45,14 +48,64 @@ public class HomeController {
 	public ModelAndView registerProcess(HttpServletRequest request, HttpServletResponse response,
 			@ModelAttribute("user") User user) {
 			System.out.println("ranu");
-			int userId = userDao.getUserId();
+			int userId = userService.getUserId();
 			user.setId(userId);
-			userDao.insert(user);
+			userService.insert(user);
 			
 				
 	    return new ModelAndView("redirect:/login");
 
 	}
+	
+	@RequestMapping(value = "/forgot", method = RequestMethod.GET)
+	public ModelAndView displayForgot(HttpServletRequest request, HttpServletResponse response) {
+		return new ModelAndView("userForgotPass");
+	}
+
+	@RequestMapping(value = "/forgotProcess", method = RequestMethod.POST)
+	public ModelAndView forgotProcess(HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute("user") User user) {
+		ModelAndView modelAndView=null;
+		boolean flag = userService.getUserEmailId(user.getEmail());
+
+		if (flag) 
+		{
+			String subject = "PASSWORD RECOVERY";
+			User userInfo=userService.getUserDetails(user.getEmail());
+			String content = "Your Password is " + userInfo.getPassword();
+			try 
+			{
+			 EmailUtility.sendEmail(user.getEmail(),subject,content);
+			} catch (AddressException e) 
+			{
+				e.printStackTrace();
+			} catch (MessagingException e) 
+			{
+				e.printStackTrace();
+			}
+		    finally 
+	        {
+		     modelAndView = new ModelAndView("Result");
+			 modelAndView.addObject("msg", "The e-mail was sent successfully");
+            }
+		}
+		else 
+		{
+			modelAndView = new ModelAndView("forgot");
+			modelAndView.addObject("error", "Please Enter Correct Email-Id...!");
+
+		}
+       return modelAndView;
+	
+	}
+	
+	
+	@RequestMapping(value = "/result", method = RequestMethod.GET)
+	public ModelAndView displayResult(HttpServletRequest request, HttpServletResponse response) {
+		return new ModelAndView("Result");
+	}
+
+	
 	
 	@RequestMapping(value = "/loginPage", method = RequestMethod.GET)
 	public ModelAndView displayLoginPage(HttpServletRequest request, HttpServletResponse response) {
@@ -75,7 +128,7 @@ public class HomeController {
    {
 	  
 	ModelAndView modelAndView=null;
-	user=userDao.getUserDetails(user.getEmail());
+	user=userService.getUserDetails(user.getEmail());
 	HttpSession session = request.getSession();
 	session.setAttribute("user",user);
     

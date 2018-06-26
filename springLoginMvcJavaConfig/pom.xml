@@ -20,6 +20,7 @@
 		<servlet.version>2.5</servlet.version>
 
 
+
 		<!-- Spring -->
 		<spring-framework.version>3.2.3.RELEASE</spring-framework.version>
 
@@ -36,6 +37,13 @@
 
 	<dependencies>
 
+		<!-- Mail API -->
+		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4</version>
+		</dependency>
 
 		<!-- spring -bean -->
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-beans -->

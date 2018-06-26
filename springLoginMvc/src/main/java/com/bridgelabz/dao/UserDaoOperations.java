@@ -64,6 +64,7 @@ public class UserDaoOperations implements UserDao {
 		String result=JdbcTemplate.queryForObject(sql, new Object[] {email}, String.class);
 				
 		System.out.println("password Dao : "+result);
+		
 		 if(result.equals(password))
 		 {
 		  return true;

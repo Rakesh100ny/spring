@@ -18,6 +18,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import com.bridgelabz.dao.UserDao;
 import com.bridgelabz.dao.UserDaoOperations;
 import com.bridgelabz.interceptor.Validation;
+import com.bridgelabz.service.UserService;
+import com.bridgelabz.service.UserServiceImpl;
 
 @Configuration
 @EnableWebMvc
@@ -65,10 +67,15 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 		return new UserDaoOperations();
 	}
 	
-
+    @Bean
+    public UserService userService()
+    {
+     return new UserServiceImpl();	
+    }
+    
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new Validation(userDao())).addPathPatterns("/*Process");
+		registry.addInterceptor(new Validation()).addPathPatterns("/*Process");
 	}
 
 }
