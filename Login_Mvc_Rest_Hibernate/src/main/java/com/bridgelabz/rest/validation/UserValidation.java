@@ -7,7 +7,9 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+import com.bridgelabz.rest.model.ForgotModel;
 import com.bridgelabz.rest.model.LoginModel;
+import com.bridgelabz.rest.model.PasswordModel;
 import com.bridgelabz.rest.model.RegisterModel;
 
 @Component
@@ -18,7 +20,7 @@ public class UserValidation implements Validator {
 	EmailValidator emailValidator;
 
 	public boolean supports(Class<?> clazz) {
-		if (RegisterModel.class.equals(clazz) || LoginModel.class.equals(clazz)) {
+		if (RegisterModel.class.equals(clazz) || LoginModel.class.equals(clazz)|| ForgotModel.class.equals(clazz) || PasswordModel.class.equals(clazz)) {
 			return true;
 		}
 
@@ -49,6 +51,21 @@ public class UserValidation implements Validator {
 			if (!emailValidator.valid(user.getEmail())) {
 				errors.rejectValue("email", "Pattern.email");
 			}
+		}
+		else if(target instanceof ForgotModel)
+		{
+		 ForgotModel user=(ForgotModel) target;	
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "NotEmpty.email");
+			if (!emailValidator.valid(user.getEmail())) {
+				errors.rejectValue("email", "Pattern.email");
+			}
+
+		}
+		else if(target instanceof PasswordModel)
+		{
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty.password");
+			
+
 		}
 
 	}

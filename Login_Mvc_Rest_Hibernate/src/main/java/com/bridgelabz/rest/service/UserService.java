@@ -1,7 +1,10 @@
 package com.bridgelabz.rest.service;
 
+import java.security.SignatureException;
+
 import javax.servlet.http.HttpServletRequest;
 
+import com.bridgelabz.rest.model.EmailModel;
 import com.bridgelabz.rest.model.RegisterModel;
 import com.bridgelabz.rest.model.User;
 
@@ -15,8 +18,10 @@ public interface UserService {
 
 	User getUserDetails(String email);
 	
-	 boolean getUserById(String token);
+	 User getUserById(String token) throws NumberFormatException, SignatureException;
 	 
 	 void updateUser(User user);
+
+	EmailModel getEmailModel(String token,HttpServletRequest request,User user);
 
 }

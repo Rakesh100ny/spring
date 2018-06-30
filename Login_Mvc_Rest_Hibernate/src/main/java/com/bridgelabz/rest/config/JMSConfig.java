@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.core.JmsTemplate;
 
 import com.bridgelabz.rest.jms.MessageSender;
+import com.bridgelabz.rest.model.EmailModel;
 
 @Configuration
 public class JMSConfig 
@@ -32,6 +33,12 @@ public class JMSConfig
   jmsTemplate.setConnectionFactory(connectionFactory());
   jmsTemplate.setDefaultDestinationName(MAIL_QUEUE);
   return jmsTemplate;
+ }
+ 
+ @Bean 
+ public EmailModel getEmailModel()
+ {
+  return new EmailModel();	 
  }
  
  @Bean
