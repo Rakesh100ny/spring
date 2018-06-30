@@ -1,5 +1,6 @@
 package com.bridgelabz.rest.utility;
 
+import java.security.SignatureException;
 import java.util.Date;
 
 import io.jsonwebtoken.Claims;
@@ -9,7 +10,8 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class Token {
 	
 	
-		private static String KEY="ARefbnionUIO";
+		private static String KEY="@Ron1900100ny#";
+		
 		public static String generateToken(int id)
 		{
 			long currentTime=System.currentTimeMillis();
@@ -26,13 +28,11 @@ public class Token {
 			return getToken;
 		}
 		
-		public static int getId(String token)
+		public static String getParseJWT(String token) throws SignatureException
 		 {
-			 int id=0;
-			 
-			 Claims claim = Jwts.parser().setSigningKey(KEY).parseClaimsJws(token).getBody();
-			 id=Integer.parseInt(claim.getId());
-			 return id;
+			 Claims claim =  Jwts.parser().setSigningKey(KEY).parseClaimsJws(token).getBody();
+			 	 
+			 return claim.getId();
 		 }
 
 }

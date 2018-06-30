@@ -7,7 +7,8 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.bridgelabz.rest.model.User;
+import com.bridgelabz.rest.model.LoginModel;
+import com.bridgelabz.rest.model.RegisterModel;
 
 @Component
 public class UserValidation implements Validator {
@@ -15,25 +16,41 @@ public class UserValidation implements Validator {
 	@Autowired
 	@Qualifier("emailValidator")
 	EmailValidator emailValidator;
-	
+
 	public boolean supports(Class<?> clazz) {
-		return User.class.equals(clazz);
+		if (RegisterModel.class.equals(clazz) || LoginModel.class.equals(clazz)) {
+			return true;
+		}
+
+		return false;
 	}
 
-	public void validate(Object target, Errors errors)
-	{
-		User user = (User) target;
-		
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "NotEmpty.firstName");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastName", "NotEmpty.lastName");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "NotEmpty.email");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty.password");
-	
-		if(!emailValidator.valid(user.getEmail())){
-			errors.rejectValue("email", "Pattern.email");
+	public void validate(Object target, Errors errors) {
+
+		System.out.println("Target : " + target);
+
+		if (target instanceof RegisterModel) {
+			RegisterModel user = (RegisterModel) target;
+
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "NotEmpty.firstName");
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastName", "NotEmpty.lastName");
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "NotEmpty.email");
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty.password");
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "mobileNo", "NotEmpty.mobileNo");
+
+			if (!emailValidator.valid(user.getEmail())) {
+				errors.rejectValue("email", "Pattern.email");
+			}
+		} else if (target instanceof LoginModel) {
+			LoginModel user = (LoginModel) target;
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "NotEmpty.email");
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty.password");
+
+			if (!emailValidator.valid(user.getEmail())) {
+				errors.rejectValue("email", "Pattern.email");
+			}
 		}
-	}	
-	
+
+	}
+
 }
-
-

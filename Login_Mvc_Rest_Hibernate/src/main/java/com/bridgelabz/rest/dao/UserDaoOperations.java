@@ -21,7 +21,6 @@ public class UserDaoOperations implements UserDao {
 	@Override
 	public void insert(User user) 
 	{
-	//String Token=Utility.generateToken(user.getId());
 	 	 
 	 Session session=sessionFactory.getCurrentSession();
 	 session.save(user);
@@ -30,7 +29,7 @@ public class UserDaoOperations implements UserDao {
 
 	
 	@Override
-	public User isCheckPassword(String password, String email) {
+	public User isCheckPassword(String email) {
 
 		Session session=sessionFactory.getCurrentSession();
 		@SuppressWarnings("deprecation")
@@ -64,11 +63,30 @@ public class UserDaoOperations implements UserDao {
 		Criteria criteria = session.createCriteria(User.class).add(Restrictions.eq("email", email))
 				.setProjection(Projections.count("email"));
 		
-		@SuppressWarnings("unchecked")
 		long count = (long) criteria.uniqueResult();
 		
 	  return count;
 			   
+	}
+
+
+	@Override
+	public User getUserById(int id) {
+		Session session=sessionFactory.getCurrentSession();
+		@SuppressWarnings("deprecation")
+		Criteria criteria = session.createCriteria(User.class).add(Restrictions.eq("id", id));
+		
+		User user=(User) criteria.uniqueResult();
+		return user;
+	}
+
+
+	@Override
+	public void updateUser(User user)
+	{
+     Session session=sessionFactory.getCurrentSession();
+     session.update(user);
+     System.out.println("User successfully Updated...!");
 	}
 	
 	

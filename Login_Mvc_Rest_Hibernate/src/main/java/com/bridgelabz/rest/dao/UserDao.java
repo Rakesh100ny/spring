@@ -11,10 +11,11 @@ public interface UserDao
 
 	 long isUserExist(String email);
 
-	 User isCheckPassword(String password, String email);
+	 User isCheckPassword(String email);
     
 	 User getUserDetails(String email);
  
+	 User getUserById(int id);
  
- 
+     void updateUser(User user);
 }
