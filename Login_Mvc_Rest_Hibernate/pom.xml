@@ -31,7 +31,21 @@
 			<version>5.0.6.RELEASE</version>
 		</dependency>
 
+		<!-- Redis -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-redis -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-redis</artifactId>
+			<version>2.0.8.RELEASE</version>
+		</dependency>
 
+		<!--Redis Client -->
+		<!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>2.9.0</version>
+		</dependency>
 
 		<!-- Spring Web Mvc -->
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
@@ -68,14 +82,7 @@
 			<artifactId>spring-security-web</artifactId>
 			<version>5.0.6.RELEASE</version>
 		</dependency>
-		<!--ActiveMQ -->
-		<!-- https://mvnrepository.com/artifact/org.apache.activemq/activemq-broker -->
-		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-broker</artifactId>
-			<version>5.15.4</version>
-		</dependency>
-
+	
 		<!--spring-security-config -->
 		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
 		<dependency>

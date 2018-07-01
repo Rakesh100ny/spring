@@ -7,7 +7,7 @@ public class MyWebInitializer extends AbstractAnnotationConfigDispatcherServletI
 
 	 @Override
 	   protected Class<?>[] getRootConfigClasses() {
-	      return new Class[] { HibernateConfig.class,JMSListnerConfiguration.class,JMSConfig.class };
+	      return new Class[] { HibernateConfig.class,JMSListnerConfiguration.class,JMSConfig.class,RedisConfig.class };
 	   }
 
 	   @Override

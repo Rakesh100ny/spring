@@ -16,7 +16,7 @@ public class JMSConfig
  private final String DEFAULT_BROKER_URL="tcp://localhost:61616";
  private final String MAIL_QUEUE="mail.queue";
 	
-
+ 
  @Bean
  public ActiveMQConnectionFactory connectionFactory()
  {
@@ -25,6 +25,7 @@ public class JMSConfig
   connectionFactory.setTrustedPackages(Arrays.asList("com.bridgelabz.rest"));
   return connectionFactory;
  }
+ 
  
  @Bean
  public JmsTemplate jmsTemplate()

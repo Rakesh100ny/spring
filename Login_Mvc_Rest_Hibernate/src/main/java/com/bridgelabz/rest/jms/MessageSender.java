@@ -8,12 +8,13 @@ import javax.jms.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
+import org.springframework.jms.core.support.JmsGatewaySupport;
 import org.springframework.stereotype.Component;
 
 import com.bridgelabz.rest.model.EmailModel;
 
 @Component
-public class MessageSender {
+public class MessageSender{
 
 	@Autowired
 	JmsTemplate template;

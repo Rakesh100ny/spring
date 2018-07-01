@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
@@ -19,15 +18,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bridgelabz.rest.exception.UserNotFoundException;
-import com.bridgelabz.rest.jms.MessageSender;
-import com.bridgelabz.rest.model.EmailModel;
 import com.bridgelabz.rest.model.ForgotModel;
 import com.bridgelabz.rest.model.LoginModel;
 import com.bridgelabz.rest.model.PasswordModel;
 import com.bridgelabz.rest.model.RegisterModel;
 import com.bridgelabz.rest.model.User;
 import com.bridgelabz.rest.service.UserService;
-import com.bridgelabz.rest.utility.Token;
 import com.bridgelabz.rest.validation.UserValidation;
 
 @RestController
@@ -38,8 +34,6 @@ public class HomeController {
    	@Autowired
 	private UserValidation userValidation;
    	
-   	@Autowired
-   	private MessageSender messageSender;
 
    	
    	
@@ -90,6 +84,7 @@ public class HomeController {
 		
 		if (!userService.isCheckCredentials(loginModel.getPassword(), loginModel.getEmail())) {
 			System.out.println("A User with Email-Id " + loginModel.getEmail() + " and Password " + loginModel.getPassword() + " is Invalid");
+			System.out.println("A User with Email-Id " + loginModel.getEmail() + " is not Activated Account Please Activate Account First");
 			return new ResponseEntity<User>(HttpStatus.CONFLICT);
 		}
 
@@ -105,20 +100,14 @@ public class HomeController {
 		System.out.println("Token : " + token);
 		System.out.println("Ranu");
 
-		User user= userService.getUserById(token);
-		
-		if (user != null) {
-			user.setActivated(true);
-			userService.updateUser(user);
-			return new ResponseEntity<String>("User is Successfully Activated...!", HttpStatus.OK);
-		} else {
-			 throw new UserNotFoundException("User Not Found...!");	
-		}
+		userService.isVerified(token);
+
+		return new ResponseEntity<String>("User is Successfully Activated...!", HttpStatus.OK);
 
 	}
 	
 	@RequestMapping(value="/forgotpassword",method=RequestMethod.POST)
-	public ResponseEntity<String> forgotpassword(@Validated @RequestBody ForgotModel forgotModel, BindingResult result,HttpServletRequest request) throws UserNotFoundException
+	public ResponseEntity<String> forgotPassword(@Validated @RequestBody ForgotModel forgotModel, BindingResult result,HttpServletRequest request) throws UserNotFoundException
 	{
 		if(result.hasErrors())
 		{
@@ -126,47 +115,30 @@ public class HomeController {
 		}	
 		
 		System.out.println("forgot Email : "+forgotModel.getEmail());
+	
 		
-	 User user=userService.getUserDetails(forgotModel.getEmail());
-	 
-	 System.out.println("User : "+user);
-	  
-	 if(user!=null)
-	 {
-	  String token=Token.generateToken(user.getId());
-	  
-	  EmailModel emailModel= userService.getEmailModel(token,request,user);
-	  	 
-	  messageSender.sendMessage(emailModel);
-		return new ResponseEntity<String>("Reset Password...!", HttpStatus.OK);
-
-	 }
-	 else
-	 {
-		 throw new UserNotFoundException("User Not Found...!");
-	 }
-	 
-	 
+		userService.forgotPassword(forgotModel.getEmail(),request);
 		
+	return new ResponseEntity<String>("Reset Password...!", HttpStatus.OK);
+	
 	}
 	
 	@RequestMapping(value = "/resetpassword/{token:.+}", method = RequestMethod.POST)
-	public ResponseEntity<String> restpassword(@Validated @RequestBody PasswordModel passwordModel,@PathVariable("token") String token) throws SignatureException, UserNotFoundException {
+	public ResponseEntity<String> restPassword(@Validated @RequestBody PasswordModel passwordModel,BindingResult result,@PathVariable("token") String token) throws SignatureException, UserNotFoundException {
 
 		System.out.println("Token : " + token);
 
-		User user= userService.getUserById(token);
+		System.out.println("password "+passwordModel.getPassword());
 		
-		if (user != null) {
-			user.setPassword(BCrypt.hashpw(passwordModel.getPassword(), BCrypt.gensalt(12)));
-			System.out.println("password : " + user.getPassword());
-
-			userService.updateUser(user);
-			return new ResponseEntity<String>("Password is Successfully Updated...!", HttpStatus.OK);
-		} else {
-			 throw new UserNotFoundException("User Not Found...!");	
+		if(result.hasErrors())
+		{
+			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);	
 		}
+		
+		System.out.println("rakesh1");
+		userService.restPassword(token,passwordModel.getPassword());
 
+		return new ResponseEntity<String>("Password is Successfully Updated...!", HttpStatus.OK);
 
 	}
 

@@ -3,33 +3,38 @@ package com.bridgelabz.rest.service;
 import java.security.SignatureException;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.bridgelabz.rest.dao.UserDao;
+import com.bridgelabz.rest.exception.UserNotFoundException;
 import com.bridgelabz.rest.jms.MessageSender;
 import com.bridgelabz.rest.model.EmailModel;
 import com.bridgelabz.rest.model.RegisterModel;
 import com.bridgelabz.rest.model.User;
+import com.bridgelabz.rest.utility.RedisUtility;
 import com.bridgelabz.rest.utility.Token;
 
 @Service
 public class UserServiceImpl implements UserService {
 
 	@Autowired
-	UserDao userDao;
+	private UserDao userDao;
 
 	@Autowired
-	User user;
+	private User user;
 
 	@Autowired
 	private EmailModel emailModel;
-	
+
 	@Autowired
-	MessageSender messageSender;
+	private MessageSender messageSender;
+
+	@Autowired
+	private RedisUtility redisUtility;
 
 	@Transactional
 	@Override
@@ -65,6 +70,12 @@ public class UserServiceImpl implements UserService {
 		emailModel.setUrl(url);
 
 		messageSender.sendMessage(emailModel);
+
+		redisUtility.saveToken(Integer.toString(user.getId()), token);
+
+		String tokenValue = redisUtility.getSaveToken(Integer.toString(user.getId()));
+
+		System.out.println("Saved Token in Redis : " + tokenValue);
 
 	}
 
@@ -109,8 +120,8 @@ public class UserServiceImpl implements UserService {
 
 	@Transactional
 	@Override
-	public User getUserById(String token) throws NumberFormatException, SignatureException {
-			return userDao.getUserById(Integer.parseInt(Token.getParseJWT(token)));
+	public User getUserById(int id) {
+		return userDao.getUserById(id);
 	}
 
 	@Transactional
@@ -120,7 +131,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public EmailModel getEmailModel(String token, HttpServletRequest request,User user) {
+	public EmailModel getEmailModel(String token, HttpServletRequest request, User user) {
 		StringBuffer URL = request.getRequestURL();
 		System.out.println("URL : " + URL);
 
@@ -134,4 +145,82 @@ public class UserServiceImpl implements UserService {
 		return emailModel;
 	}
 
+	@Transactional
+	@Override
+	public void isVerified(String token) {
+		String storedToken = null;
+		try {
+			storedToken = redisUtility.getSaveToken(Token.getParseJWT(token));
+			System.out.println("isvarified storedToken : "+storedToken);
+			redisUtility.expireSaveToken(Token.getParseJWT(token));
+			if (storedToken.equals(token)) {
+
+				User user = getUserById(Integer.parseInt(Token.getParseJWT(token)));
+
+				if (user != null) {
+					user.setActivated(true);
+					updateUser(user);
+
+				} else {
+					throw new UserNotFoundException("User Not Found...!");
+				}
+			}
+		} catch (NumberFormatException | SignatureException | UserNotFoundException e) {
+			System.err.println("Exception [UserServiceImp.java] : " + e.getMessage());
+		}
+
+	}
+
+	@Transactional
+	@Override
+	public void forgotPassword(String email, HttpServletRequest request) {
+		User user = getUserDetails(email);
+		if (user != null) {
+			String token = Token.generateToken(user.getId());
+
+			redisUtility.saveToken(Integer.toString(user.getId()), token);
+
+			EmailModel emailModel = getEmailModel(token, request, user);
+
+			messageSender.sendMessage(emailModel);
+
+		} else {
+			try {
+				throw new UserNotFoundException("User Not Found...!");
+			} catch (UserNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Transactional
+	@Override
+	public void restPassword(String token, String password) {
+		System.out.println("rakesh2");
+		try {
+			String storedToken = redisUtility.getSaveToken(Token.getParseJWT(token));
+			System.out.println("storedToken : "+storedToken);
+			redisUtility.expireSaveToken(Token.getParseJWT(token));
+			if (storedToken.equals(token)) {
+				System.out.println("r1");
+				User user = getUserById(Integer.parseInt(Token.getParseJWT(token)));
+
+				
+				if (user != null) {
+					user.setPassword(BCrypt.hashpw(password, BCrypt.gensalt(12)));
+					System.out.println("password : " + user.getPassword());
+
+					updateUser(user);
+
+				} else {
+					throw new UserNotFoundException("User Not Found...!");
+				}
+			} else {
+				System.out.println("Token is not matched");
+			}
+		} catch (SignatureException | UserNotFoundException e) {
+			e.printStackTrace();
+		}
+
+	}
 }
